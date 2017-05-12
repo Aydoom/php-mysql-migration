@@ -5,16 +5,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 namespace PMMigration\Core\Fields;
 
 /**
- * Description of DateTimeField
+ * Description of IntField
  *
  * @author Aydoom
  */
-class DateTimeField extends \PMMigration\Core\Field {
+class VarcharField extends \PMMigration\Core\Field {
     
     public function get()
+    {
+    }
+    
+    public function compare()
     {
     }
 }

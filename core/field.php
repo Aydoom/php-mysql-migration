@@ -13,7 +13,7 @@ namespace PMMigration\Core;
  *
  * @author Aydoom
  */
-class Field {
+abstract class Field {
     //put your code here
     
     public $len = 32;
@@ -25,6 +25,11 @@ class Field {
     public $primary = false;
     
     /**
+     *
+    */
+    abstract public function get();
+    
+    /**
      * 
      * @return $this
      */
@@ -33,11 +38,6 @@ class Field {
         $this->autoincrement = true;
         
         return $this;
-    }
-    
-    public function get()
-    {
-        
     }
     
     /**
@@ -71,7 +71,7 @@ class Field {
      * 
      * @return $this
      */
-    public function primary()
+    public function primary_key()
     {
         $this->primary = true;
         

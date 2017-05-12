@@ -2,7 +2,7 @@
 
 namespace PMMigration\Core;
 
-use PMMigration\Core\Fields as Field;
+use PMMigration\Core\Fields as Fields;
 /**
  * 
  */
@@ -13,15 +13,19 @@ class Table {
     /**
      * 
      * @param type $name
+     * @param type $type
      */
-    public function addField($name)
+    public function addField($name, $type)
     {
-        switch($name):
+        switch(strtolower($type)):
             case "datetime": 
-                $field = new DateTimeField($name);
+                $field = new Fields\DateTimeField($name);
                 break;
             case "int":
-                $field = new IntField($name);
+                $field = new Fields\IntField($name);
+                break;
+            case "varchar":
+                $field = new Fields\VarcharField($name);
                 break;
         endswitch;
         
@@ -36,8 +40,7 @@ class Table {
      */
     public function defDate($name)
     {
-        $this->addField($name)
-                ->type("datetime");
+        $this->addField($name, "datetime");
     }
     
     /**
@@ -56,8 +59,7 @@ class Table {
      */
     public function defId()
     {
-        $this->addField('id')
-                ->type('int')
+        $this->addField('id', 'int')
                 ->len(11)
                 ->def('not null')
                 ->autoincrement()
@@ -70,8 +72,7 @@ class Table {
      */
     public function defVarchar($name)
     {
-        $this->addField($name)
-                ->type('varchar')
+        $this->addField($name, 'varchar')
                 ->len(100)
                 ->def('not null')
                 ->compare('utf-8');
@@ -84,9 +85,12 @@ class Table {
     public function defVarchars($names)
     {
         foreach($names as $name) {
-            $this->_varchar($name);
+            $this->defVarchar($name);
         }
     }
 	
-	
+	public function getFields()
+    {
+        return $this->fields;
+    }
 }

@@ -13,6 +13,9 @@ namespace PMMigration\Core\Fields;
  *
  * @author Aydoom
  */
-class IntField {
-    //put your code here
+class IntField extends \PMMigration\Core\Field {
+    
+    public function get()
+    {
+    }
 }

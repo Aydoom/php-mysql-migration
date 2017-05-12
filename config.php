@@ -2,9 +2,9 @@
 
 $config = [
 	'host' 		=> 'localhost',
-	'dbname' 	=> 'myDB',
-	'user'		=> 'root',
-	'password'	=> 'secret',
+	'dbname' 	=> 'domninpa_joomla',
+	'user'		=> 'domninpa',
+	'password'	=> 'go5Quixa',
 	'port'		=> 3306,
 	'driver'	=> 'mysql'
 ];
