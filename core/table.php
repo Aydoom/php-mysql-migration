@@ -22,11 +22,10 @@ class Table {
             case "datetime": 
                 $field = new Fields\DateTimeField($name);
                 break;
-            case "int":
-                $field = new Fields\IntField($name);
-                break;
-            case "varchar":
-                $field = new Fields\VarcharField($name);
+            default:
+                $className = 'PMMigration\\Core\\Fields\\'
+                    . ucfirst(strtolower($type)) . "Field";
+                $field = new $className($name);
                 break;
         endswitch;
         
@@ -47,11 +46,11 @@ class Table {
             }
         }
         
-        $query = "CREATE TABLE {$this->name} (" . implode(", ", $fields);
+        $query = "CREATE TABLE `{$this->name}` (" . implode(", ", $fields);
             $query.= ($add) ? ", {$add}" : "";
         $query.=")";
 
-        echo $query;
+        return $query;
     }
     
     /**
@@ -84,6 +83,14 @@ class Table {
                 ->def('not null')
                 ->autoincrement()
                 ->primary_key();
+    }
+    
+    /**
+     * 
+     */
+    public function defText()
+    {
+        $this->addField('id', 'text')->len(512);
     }
 
     /**

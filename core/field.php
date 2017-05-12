@@ -14,10 +14,8 @@ namespace PMMigration\Core;
  * @author Aydoom
  */
 abstract class Field {
-
-    public $autoincrement = false;
     
-    public $def = "null";
+    public $def = NULL;
 
     public $len = 32;
     
@@ -37,17 +35,6 @@ abstract class Field {
     
     /**
      * 
-     * @return $this
-     */
-    public function autoincrement()
-    {
-        $this->autoincrement = true;
-        
-        return $this;
-    }
-    
-    /**
-     * 
      * @param type $value
      * @return $this
      */
@@ -63,7 +50,12 @@ abstract class Field {
      */
     public function getString()
     {
-        return "{$this->name} " . strtoupper($this->type) . "({$this->len})";
+        $default = ($this->def) ? strtoupper(" {$this->def}") : "";
+        
+        return "{$this->name} " 
+                . strtoupper($this->type)
+                . "({$this->len})"
+                . $default;
     }
     
     /**

@@ -15,5 +15,28 @@ namespace PMMigration\Core\Fields;
  */
 class IntField extends \PMMigration\Core\Field {
 
+    public $autoincrement = false;
+
     public $type = "INT";
+    
+    /**
+     * 
+     * @return $this
+     */
+    public function autoincrement()
+    {
+        $this->autoincrement = true;
+        
+        return $this;
+    }
+    
+    /**
+     * 
+     */
+    public function getString()
+    {
+        $ai = ($this->autoincrement) ? " AUTO_INCREMENT" : "";
+        
+        return parent::getString() . $ai;
+    }
 }
