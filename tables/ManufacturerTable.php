@@ -24,11 +24,11 @@ class ManufacturerTable extends \PMMigration\Core\Table {
             $this->name = $name;
         }
         
-        $this->defId('id', 'primary');
+        $this->defId('id');
         $this->defVarchars(['name', 'logo']);
         $this->defText('description');
         $this->defDates(['date_create', 'date_update']);
-        $this->defId('id_creator');
-        $this->defId('id_updater');
+        $this->defId('id_creator', false);
+        $this->defId('id_updater', false);
     }
 }

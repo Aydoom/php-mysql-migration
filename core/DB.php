@@ -52,7 +52,9 @@ class DB extends \PDO {
      */
     public function create($table)
     {
-        $this->query($table->getQuery());
+        if($this->query($table->getQuery())) {
+            echo "Table: <b>\"{$table->name}\"</b> is successful created.";
+        }
     }
     
     public function seenFields($table = false)

@@ -75,14 +75,33 @@ class Table {
     
     /**
      * 
+     * @param type $name
+     * @param type $primary
      */
-    public function defId()
+    public function defId($name, $primary = true)
     {
-        $this->addField('id', 'int')
+        if ($primary) {
+            $this->addField($name, 'int')
                 ->len(11)
                 ->def('not null')
                 ->autoincrement()
                 ->primary_key();
+        } else {
+            $this->addField($name, 'int')
+                ->len(11)
+                ->def('not null');
+        }
+    }
+    /**
+     * 
+     * @param type $name
+     * @param type $primary
+     */
+    public function defIds($names)
+    {
+        foreach($names as $name) {
+            $this->defId($name, false);
+        }
     }
     
     /**
