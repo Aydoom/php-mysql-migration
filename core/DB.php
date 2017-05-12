@@ -7,11 +7,11 @@ class DB extends \PDO {
     public $tables = [];
     public $exTables = [];
     
-	/**
-	 * Constructor
-	*/
-	public function __construct($config)
-	{
+    /**
+     * Constructor
+    */
+    public function __construct($config)
+    {
         $connect = $config['driver'] . ':host=' . $config['host']
             . ';dbname=' . $config['dbname'];
        
@@ -22,12 +22,17 @@ class DB extends \PDO {
         }
         
         $this->getExTables();
-	}
+    }
     
-    public function add(Table $table)
+    public function add(Table $table, $nowCreate = true)
     {
-        if (!in_array($table->name, array_keys($this->tables))
-                && !in_array($table->name, $this->exTables)) {
+        if (in_array($table->name, array_keys($this->tables))
+                || in_array($table->name, $this->exTables)) {
+            return false;
+        } elseif ($nowCreate) {
+            $this->create($table);
+            return true;
+        } else {
             $this->tables[$table->name] = $table;
         }
     }
@@ -39,6 +44,15 @@ class DB extends \PDO {
         while ($row = $tables->fetch()) {
             $this->exTables[] = $row[0];
         }  
+    }
+    
+    /**
+     * 
+     * @param type $table
+     */
+    public function create($table)
+    {
+        $this->query($table->getQuery());
     }
     
     public function seenFields($table = false)

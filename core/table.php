@@ -8,6 +8,7 @@ use PMMigration\Core\Fields as Fields;
  */
 class Table {
     
+    public $name = "table";
     public $fields = [];
     
     /**
@@ -32,6 +33,25 @@ class Table {
         $this->fields[$name] = $field;
         
         return $this->fields[$name];
+    }
+    
+    /**
+     * 
+     */
+    public function getQuery()
+    {
+        foreach ($this->fields as $name => $field) {
+            $fields[] = $field->getString();
+            if ($field->primary) {
+                $add = "PRIMARY KEY({$name})";
+            }
+        }
+        
+        $query = "CREATE TABLE {$this->name} (" . implode(", ", $fields);
+            $query.= ($add) ? ", {$add}" : "";
+        $query.=")";
+
+        echo $query;
     }
     
     /**

@@ -14,8 +14,6 @@ namespace PMMigration\Core\Fields;
  * @author Aydoom
  */
 class IntField extends \PMMigration\Core\Field {
-    
-    public function get()
-    {
-    }
+
+    public $type = "INT";
 }

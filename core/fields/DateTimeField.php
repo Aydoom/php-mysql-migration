@@ -13,8 +13,15 @@ namespace PMMigration\Core\Fields;
  * @author Aydoom
  */
 class DateTimeField extends \PMMigration\Core\Field {
+
+    public $type = "DATETIME";
     
-    public function get()
+    /**
+     * 
+     */
+    public function getString()
     {
+        return "{$this->name} " . strtoupper($this->type);
     }
+
 }

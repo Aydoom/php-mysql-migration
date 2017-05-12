@@ -15,10 +15,11 @@ namespace PMMigration\Core\Fields;
  */
 class VarcharField extends \PMMigration\Core\Field {
     
-    public function get()
-    {
-    }
+    public $type = "VARCHAR";
     
+    /**
+     * 
+     */
     public function compare()
     {
     }

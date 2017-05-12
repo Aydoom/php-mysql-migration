@@ -14,20 +14,26 @@ namespace PMMigration\Core;
  * @author Aydoom
  */
 abstract class Field {
-    //put your code here
-    
-    public $len = 32;
+
+    public $autoincrement = false;
     
     public $def = "null";
+
+    public $len = 32;
     
-    public $autoincrement = false;
+    public $name;
     
     public $primary = false;
     
+    public $type = "None";
+    
     /**
-     *
-    */
-    abstract public function get();
+     * 
+     * @param type $name
+     */
+    public function __construct($name) {
+        $this->name = $name;
+    }
     
     /**
      * 
@@ -52,6 +58,14 @@ abstract class Field {
         return $this;
     }
 
+    /**
+     * 
+     */
+    public function getString()
+    {
+        return "{$this->name} " . strtoupper($this->type) . "({$this->len})";
+    }
+    
     /**
      * The function is setting the length of field
      * 
